@@ -3,7 +3,7 @@ import React from "react";
 import Icons from "./Icons";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
-import PP from "../../public/ProfilePic.webp";
+import PP from "../../public/ProfilePic.png";
 
 const Header = () => {
   return (
