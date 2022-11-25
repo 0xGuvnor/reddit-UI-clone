@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+.bg-coin {
+  background: linear-gradient(
+      180deg,
+      hsl(0deg 0% 100% / 10%) 45.96%,
+      hsla(0, 0%, 100%, 0.57) 46%,
+      hsla(0, 0%, 100%, 0) 130%
+    ),
+    #ffe10d;
+}
+
+.shadow-coin {
+  box-shadow: 0 2px 0 #eed000;
+}
+
+.work-sans {
+  font-family: "Work Sans", sans-serif;
+}
