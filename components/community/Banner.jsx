@@ -24,12 +24,7 @@ const Banner = () => {
   return (
     <div className="flex flex-col mt-14">
       <div className="relative w-screen h-52 xl:h-96">
-        <Image
-          src={banner}
-          fill
-          className="object-cover"
-          alt="The Matrix movie theme."
-        />
+        <Image src={banner} fill className="object-cover" alt="Azuki banner" />
       </div>
       <div className="bg-[#1a1a1b]">
         <div className="max-w-5xl px-6 py-2 mx-auto">

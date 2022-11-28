@@ -25,7 +25,7 @@ const Icons = () => {
         <IconItem Icon={HiOutlinePlus} />
         <IconItem Icon={HiOutlineSpeakerphone} />
 
-        <button className="flex items-center py-1 pl-2 pr-4 space-x-1 text-gray-800 rounded-full bg-coin shadow-coin">
+        <button className="bg-coin flex items-center space-x-1 rounded-full py-1 pl-2 pr-4 text-gray-800 shadow-md hover:shadow-[#DCCCA3]">
           <HiOutlineCurrencyDollar className="w-4 h-4" />
           <span className="text-sm work-sans">Free</span>
         </button>

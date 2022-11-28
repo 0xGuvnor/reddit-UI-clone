@@ -10,7 +10,7 @@ export default function Document() {
           type="image/x-icon"
         />
       </Head>
-      <body className="bg-[#1E212B] text-white">
+      <body className="bg-[#1E212B] text-gray-100">
         <Main />
         <NextScript />
       </body>
