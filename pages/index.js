@@ -40,7 +40,7 @@ export default function Home() {
       <div className="flex min-h-screen flex-col bg-[#010101]">
         <Header />
         <Banner />
-        <main className="mx-auto flex w-full max-w-5xl flex-1 space-x-6 px-6 py-5">
+        <main className="flex flex-1 w-full max-w-5xl px-6 py-5 mx-auto space-x-6">
           <div className="w-full space-y-4">
             <CreatePost />
             <Feed posts={myPosts} />
