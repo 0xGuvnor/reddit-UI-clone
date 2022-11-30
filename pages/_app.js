@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import { RedditProvider } from "../context/RedditContext";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <RedditProvider>
+      <Component {...pageProps} />
+    </RedditProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

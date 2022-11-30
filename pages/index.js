@@ -6,9 +6,15 @@ import CreatePost from "../components/feed/CreatePost";
 import Header from "../components/header";
 import useSWR from "swr";
 import axios from "axios";
+import Login from "../components/Login";
+import { useRedditContext } from "../context/RedditContext";
 
 export default function Home() {
+  const { currentUser } = useRedditContext();
+
   const [myPosts, setMyPosts] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(true);
 
   const fetcher = (url) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR("/api/get-posts", fetcher, {
@@ -21,21 +27,29 @@ export default function Home() {
     setMyPosts(data.data);
   }, [data]);
 
-  console.log(data?.data);
+  useEffect(() => {
+    if (currentUser) setShowLoginModal(false);
+  }, [currentUser]);
+
+  console.log(currentUser);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#010101]">
-      <Header />
-      <Banner />
-      <main className="flex flex-1 w-full max-w-5xl px-6 py-5 mx-auto space-x-6">
-        <div className="w-full space-y-4">
-          <CreatePost />
-          <Feed posts={myPosts} />
-        </div>
-        <div className="hidden w-1/3 md:block">
-          <About />
-        </div>
-      </main>
-    </div>
+    <>
+      {showLoginModal && <Login show={setShowLoginModal} />}
+
+      <div className="flex min-h-screen flex-col bg-[#010101]">
+        <Header />
+        <Banner />
+        <main className="mx-auto flex w-full max-w-5xl flex-1 space-x-6 px-6 py-5">
+          <div className="w-full space-y-4">
+            <CreatePost />
+            <Feed posts={myPosts} />
+          </div>
+          <div className="hidden w-1/3 md:block">
+            <About />
+          </div>
+        </main>
+      </div>
+    </>
   );
 }

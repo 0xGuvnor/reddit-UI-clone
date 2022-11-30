@@ -32,7 +32,7 @@ const PostForm = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-      {true && <Loading />}
+      {isLoading && <Loading />}
 
       <h1 className="border-b border-[#343536] pb-3 text-lg font-medium">
         Create a Post
