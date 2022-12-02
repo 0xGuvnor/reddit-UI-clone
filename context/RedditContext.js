@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../services/supabaseClient";
 
@@ -6,6 +7,8 @@ const useRedditContext = () => useContext(RedditContext);
 
 const RedditProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
 
   useEffect(() => {
     (async () => {
@@ -22,7 +25,7 @@ const RedditProvider = ({ children }) => {
   }, []);
 
   return (
-    <RedditContext.Provider value={{ currentUser }}>
+    <RedditContext.Provider value={{ currentUser, fetcher }}>
       {children}
     </RedditContext.Provider>
   );
