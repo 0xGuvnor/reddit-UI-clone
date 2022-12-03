@@ -15,7 +15,7 @@ const Post = ({
   created_at,
 }) => {
   const router = useRouter();
-  const { setSelectedPost } = useRedditContext();
+  const { setSelectedPost, timeAgo } = useRedditContext();
 
   const navigateToPost = () => {
     setSelectedPost({
@@ -39,7 +39,10 @@ const Post = ({
           onClick={navigateToPost}
           className="flex flex-col flex-1 space-y-1 cursor-pointer"
         >
-          <Info author={author} timestamp={created_at} />
+          <Info
+            author={author}
+            timestamp={timeAgo.format(new Date(created_at), "twitter-now")}
+          />
           <h1 className="text-lg font-medium text-[#d7dadc]">{title}</h1>
           <p className="text-sm font-light text-[#d7dadc]/80">{content}</p>
           <Actions />
