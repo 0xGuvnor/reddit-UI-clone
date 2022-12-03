@@ -5,21 +5,33 @@ import Feed from "../components/feed";
 import CreatePost from "../components/feed/CreatePost";
 import Header from "../components/header";
 import useSWR from "swr";
-import axios from "axios";
 import Login from "../components/Login";
 import { useRedditContext } from "../context/RedditContext";
+import { supabase } from "../services/supabaseClient";
 
 export default function Home() {
-  const { currentUser } = useRedditContext();
+  const { currentUser, fetcher } = useRedditContext();
 
   const [myPosts, setMyPosts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(true);
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR("/api/get-posts", fetcher, {
     refreshInterval: 200,
   });
+
+  const saveAndUpdateUser = async () => {
+    if (!currentUser) return;
+
+    await supabase.from("users").upsert(
+      {
+        email: currentUser.user_metadata.email,
+        name: currentUser.user_metadata.full_name,
+        profileURL: currentUser.user_metadata.avatar_url,
+      },
+      { onConflict: "email" }
+    );
+  };
 
   useEffect(() => {
     if (!data) return;
@@ -29,9 +41,10 @@ export default function Home() {
 
   useEffect(() => {
     if (currentUser) setShowLoginModal(false);
-  }, [currentUser]);
 
-  console.log(currentUser);
+    saveAndUpdateUser();
+    console.log("saving user...");
+  }, [currentUser]);
 
   return (
     <>
@@ -40,7 +53,7 @@ export default function Home() {
       <div className="flex min-h-screen flex-col bg-[#010101]">
         <Header />
         <Banner />
-        <main className="flex flex-1 w-full max-w-5xl px-6 py-5 mx-auto space-x-6">
+        <main className="mx-auto flex w-full max-w-5xl flex-1 space-x-6 px-6 py-5">
           <div className="w-full space-y-4">
             <CreatePost />
             <Feed posts={myPosts} />

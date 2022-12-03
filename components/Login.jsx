@@ -29,7 +29,7 @@ const Login = ({ show }) => {
   ];
 
   return (
-    <div className="fixed z-50 flex h-screen w-screen items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className="fixed z-50 flex items-center justify-center w-screen h-screen bg-black/50 backdrop-blur-sm">
       <div className="relative flex h-3/4 w-3/4 flex-col rounded-xl bg-[#1B2021] xl:w-1/2">
         <div className="absolute top-0 right-0 m-1">
           <AiOutlineClose
@@ -38,7 +38,7 @@ const Login = ({ show }) => {
           />
         </div>
 
-        <div className="-mt-16 flex h-full w-full flex-col items-center justify-center space-y-2">
+        <div className="flex flex-col items-center justify-center w-full h-full -mt-16 space-y-2">
           <div className="relative h-52 w-96">
             <Image
               src={RedditBanner}
@@ -65,12 +65,13 @@ const LoginButton = ({ provider }) => {
   return (
     <button
       onClick={provider.login}
-      className="group flex w-72 cursor-pointer items-center space-x-4 rounded border border-gray-300 p-4 transition duration-300 ease-in-out hover:bg-gray-100"
+      disabled={provider.name === "Google" ? false : true}
+      className="flex items-center p-4 space-x-4 transition duration-300 ease-in-out border border-gray-300 rounded cursor-pointer group w-72 hover:bg-gray-100"
     >
       {provider.name === "Apple" ? (
-        <BsApple className="h-6 w-6 group-hover:fill-black" />
+        <BsApple className="w-6 h-6 group-hover:fill-black" />
       ) : (
-        <div className="relative h-6 w-6">
+        <div className="relative w-6 h-6">
           <Image
             src={provider.logo}
             fill
@@ -80,7 +81,7 @@ const LoginButton = ({ provider }) => {
         </div>
       )}
 
-      <span className="flex-1 text-center font-bold group-hover:text-black">
+      <span className="flex-1 font-bold text-center group-hover:text-black">
         Sign in with {provider.name}
       </span>
     </button>
