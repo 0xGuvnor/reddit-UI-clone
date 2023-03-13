@@ -2,12 +2,13 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { HiChatAlt } from "react-icons/hi";
 import useSWR from "swr";
+import TimeAgo from "timeago-react";
 import { useRedditContext } from "../../context/RedditContext";
 import { DownvoteIcon } from "../common/DownvoteIcon";
 import { UpvoteIcon } from "../common/UpvoteIcon";
 
 const Comments = ({ postId }) => {
-  const { fetcher, timeAgo } = useRedditContext();
+  const { fetcher } = useRedditContext();
 
   const [comments, setComments] = useState([]);
 
@@ -24,16 +25,14 @@ const Comments = ({ postId }) => {
   return (
     <div className="space-y-4 rounded bg-[#1a1a1a] py-2 px-4">
       {comments &&
-        comments.map((comment, id) => (
-          <Comment details={comment} timeAgo={timeAgo} key={id} />
-        ))}
+        comments.map((comment, id) => <Comment key={id} details={comment} />)}
     </div>
   );
 };
 
 export default Comments;
 
-const Comment = ({ details, timeAgo }) => {
+const Comment = ({ details }) => {
   return (
     <div className="my-[.3rem] flex flex-col gap-[.5rem] text-sm">
       <div className="flex gap-[.4rem]">
@@ -47,9 +46,7 @@ const Comment = ({ details, timeAgo }) => {
         </div>
         <span>{details.author}</span>
         <span>•</span>
-        <span>
-          {timeAgo.format(new Date(details.created_at), "twitter-now")}
-        </span>
+        <TimeAgo datetime={details.created_at} />
       </div>
       <div className="text-sm">{details.text}</div>
       <div className="flex items-center gap-[.4rem] text-xs">
@@ -61,7 +58,7 @@ const Comment = ({ details, timeAgo }) => {
           <DownvoteIcon className="text-[#818384]" />
         </span>
         <span className="flex items-center gap-[.2rem] text-[#818384]">
-          <HiChatAlt className="w-6 h-6" />
+          <HiChatAlt className="h-6 w-6" />
           <span>Reply</span>
         </span>
         <span className="text-[#818384]">Give</span>
