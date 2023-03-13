@@ -37,11 +37,14 @@ const Post = ({
         <Vote upvotes={upvotes} downvotes={downvotes} />
         <div
           onClick={navigateToPost}
-          className="flex flex-col flex-1 space-y-1 cursor-pointer"
+          className="flex flex-1 cursor-pointer flex-col space-y-1"
         >
           <Info
             author={author}
-            timestamp={timeAgo.format(new Date(created_at), "twitter-now")}
+            timestamp={
+              1
+              // timeAgo.format(new Date(created_at), "twitter-now")
+            }
           />
           <h1 className="text-lg font-medium text-[#d7dadc]">{title}</h1>
           <p className="text-sm font-light text-[#d7dadc]/80">{content}</p>
