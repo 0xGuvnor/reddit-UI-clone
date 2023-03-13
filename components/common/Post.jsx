@@ -41,10 +41,7 @@ const Post = ({
         >
           <Info
             author={author}
-            timestamp={
-              1
-              // timeAgo.format(new Date(created_at), "twitter-now")
-            }
+            timestamp={timeAgo.format(new Date(created_at), "twitter-now")}
           />
           <h1 className="text-lg font-medium text-[#d7dadc]">{title}</h1>
           <p className="text-sm font-light text-[#d7dadc]/80">{content}</p>
