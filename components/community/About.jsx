@@ -5,12 +5,13 @@ const About = () => {
     <div className="flex flex-col space-y-2 divide-y divide-[#343536] rounded border border-[#343536] bg-[#1a1a1b] p-4 text-gray-300">
       <div className="divide-y divide-[#343536] pb-2">
         <p className="pb-2 text-gray-400">About the Community</p>
-        <div className="py-2 space-y-2 text-sm">
+        <div className="space-y-2 py-2 text-sm">
           <p>
             Take the red bean to join the garden. View the collection at{" "}
             <a
               href="https://www.azuki.com/gallery"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-blue-500"
             >
               azuki.com/gallery
@@ -26,6 +27,7 @@ const About = () => {
             <a
               href="https://www.azuki.com"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-blue-500"
             >
               azuki.com
@@ -34,7 +36,7 @@ const About = () => {
           </p>
           <p>We rise together. We build together. We grow together.</p>
         </div>
-        <div className="flex pt-2 space-x-16">
+        <div className="flex space-x-16 pt-2">
           <div className="flex flex-col">
             <span>1.2m</span>
             <span className="text-xs">Members</span>
